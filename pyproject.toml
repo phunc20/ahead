@@ -16,3 +16,9 @@ dependencies = [
 readme = "README.md"
 [project.optional-dependencies]
 #eval = ["rapidfuzz >= 2.13.1", "Unidecode >= 1.3.6"]
+
+[tool.setuptools.packages.find]
+where = ["ahead"]
+#include = ["pkg*"]
+#exclude = ["additional*"]
+#namespaces = false
