@@ -11,7 +11,7 @@ def get_fsc_ssc_chunks(
     gate_fraction: float = 0.0,
 ):
     channels = [f'FSC-{typ}', f'SSC-{typ}']
-    s = FlowCal.io.FCSData(fcs_file)
+    s = FlowCal.io.FCSData(str(fcs_file))
     s = FlowCal.transform.to_rfi(s)
     s_gated = FlowCal.gate.high_low(
         s,
