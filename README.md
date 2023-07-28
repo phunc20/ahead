@@ -1,16 +1,27 @@
 # AHEAD
-Interview preparation for applying to the start-up company AHEAD.
+Interview preparation for applying for the start-up company AHEAD.
+
+
+## Quick Start
+Here are a few quick ways to make use of the current repository
+and the related ML models.
+1. A tiny Swin Transformer model for image classification
+   ```python
+   ```
 
 
 ## Python Packages
-I shall code in Python. As of 2023/07, following the suggestion on the latest
-[`FlowCal` doc page](https://flowcal.readthedocs.io/en/latest/getting_started/install_anaconda.html)
-- We are recommended to use Python version 3.8
-- For packages used in this repo, refer to `requirements.txt`. In particular,
-    - `FlowCal==1.3.0`, which already requires many dependencies like
-      `matplotlib`, `numpy`, `openpyxl`, etc.
+- Python version 3.8 is recommended by the
+  [`FlowCal` doc page](https://flowcal.readthedocs.io/en/latest/getting_started/install_anaconda.html)
+- And the packages inside `requirements.txt`
+    - For Python newcomers, it suffices to
+      ```shell
+      $ pip install -r requirements.txt
+      ```
+    - In particular, `FlowCal` alone requires many dependecies, so it is highly possible that any package you need is included
 
-Alternatively, one could also install the current repo
+Alternatively, instead of `requirements.txt`, one could also install the current repo (so that one could use
+some of the repo's code)
 - Either by
   ```shell
   $ pip install git+https://github.com/phunc20/ahead.git
@@ -18,7 +29,9 @@ Alternatively, one could also install the current repo
 - Or download the code and install from local
   ```shell
   $ pip install -e <downloaded_repos_local_path>
-  $ # e.g. say you downloaded at ~/downloads/ahead, then it suffices to
+  $ # e.g. say you've downloaded (and unzipped) the repo at
+  $ # ~/downloads/ahead
+  $ # then it suffices to
   $ # pip install -e ~/downloads/ahead
   ```
 
@@ -40,9 +53,9 @@ First come a few observations:
       because including it won't bring any benefit.
     - As someone with almost no domain knowledge, I honestly do not know which of
       the 31 channels to discard/keep. I came up with 3 ways to proceed:
-        1. Use all 31 channels
-        1. Use 31 channels with dimensionality reduction
-        1. Suggested by `FlowCal`'s tutorial and by the problem description,
+        1. [ ] Use all 31 channels
+        1. [ ] Use 31 channels with dimensionality reduction
+        1. [x] Suggested by `FlowCal`'s tutorial and by the problem description,
            maybe we could use FSC-SSC (gated) density plot to do some kind of
            image classification. In particular,
             - I shall not attempt to do calibration to MEF because we are not
@@ -68,6 +81,9 @@ First come a few observations:
    
    This should be similar to sliding windows. To make things simple,
    I **choose not to have the windows overlap one another**.
+
+**Rmk.**
+- At the end, I do not find enough time to do all the listed experiments
 
 
 ### Validation Set

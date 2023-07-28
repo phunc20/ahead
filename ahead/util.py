@@ -6,6 +6,7 @@ import FlowCal
 
 def get_fsc_ssc_chunks(
     fcs_file: str | Path,
+    *,
     chunk_size: int = 500,
     typ: str = "A",
     gate_fraction: float = 0.0,
@@ -17,7 +18,7 @@ def get_fsc_ssc_chunks(
         s,
         channels=channels,
     )
-    if gate_fraction:
+    if 0 < gate_fraction <= 1:
         s_gated = FlowCal.gate.density2d(
             s_gated,
             channels=channels,
