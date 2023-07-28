@@ -101,6 +101,12 @@ First come a few observations:
               one immediate benefit is that even patients whose sample are
               of less number of events could be inferred using the same model
               (although the correctness of the inference is not guaranteed)
+        1. [ ] As an alternative to the previous, i.e the 3rd way, aside from
+            - FSC-A vs SSC-A
+            - FSC-W vs SSC-W
+            - FSC-H vs SSC-H
+           we could have tried all sorts of 2D density plots invovling all the
+           combinations of the `31` channels, i.e. roughly 31 choose 2 combinations
 1. As mentioned in the above subsection, the number of events varies quite a lot.
    Consequently, I decide to group
     - 500
@@ -149,3 +155,18 @@ smells, i.e. nothing really of
 production-ready, so I think it isn't
 so bad that they were in
 Jupyter-notebook form.
+
+
+## Bonus Question
+By reading the question description
+and by reading `FlowCal`'s tutorials
+side-by-side, it's hard to not have
+suspected that the gating techniques
+introduced in
+<https://flowcal.readthedocs.io/en/latest/python_tutorial/gate.html>
+may help with the bonus question.
+In particular, the
+`FlowCal.gate.density2d`
+helps reduce manual works to only one
+input arg: `gate_fraction`.
+I think it could be considered automatic.
