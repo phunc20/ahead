@@ -7,6 +7,41 @@ Here are a few quick ways to make use of the current repository
 and the related ML models.
 1. A tiny Swin Transformer model for image classification
    ```python
+   In [1]: import FlowCal
+      ...: import numpy as np
+      ...: from ahead.util import get_fsc_ssc_chunks
+      ...: from PIL import Image
+      ...: from transformers import pipeline
+   
+   In [2]: pipe = pipeline(
+      ...:     "image-classification",
+      ...:     "phunc20/swin-tiny-patch4-window7-224-finetuned-wuhan")
+   
+   In [3]: file_flow_id = "flowrepo_covid_EU_013_flow_001"
+      ...: fcs_path = next((data_dir/f'raw_fcs/{file_flow_id}').glob("*.fcs"))
+   
+   In [4]: chunk_generator = get_fsc_ssc_chunks(
+      ...:     fcs_path,
+      ...:     chunk_size=10_000,
+      ...:     typ="A",
+      ...:     gate_fraction=0.75,
+      ...: )
+   
+   In [5]: chunk = next(chunk_generator)
+      ...: chunk.shape
+   Out[5]: (10000, 2)
+   
+   In [6]: FlowCal.plot.density2d(
+      ...:     chunk,
+      ...:     mode="scatter",
+      ...:     savefig="chunk.png",
+      ...: )
+   
+   In [7]: image = Image.open("chunk.png")
+      ...: pipe(image)
+   
+   Out[7]: [{'score': 0.999931812286377, 'label': 'sick'},
+      ...:  {'score': 6.822467548772693e-05, 'label': 'healthy'}]
    ```
 
 
@@ -88,9 +123,29 @@ First come a few observations:
 
 ### Validation Set
 Possessing cell samples from 40 patients, let's isolate 4 patients
-(2 positive, 2 negative) to form our validation set. Besides,
+(2 sick, 2 healthy) to form our validation set. Besides,
 let's choose those whose `(# events)` are intermediate.
-- 2 positive: `flowrepo_covid_EU_034_flow_001` and `flowrepo_covid_EU_048_flow_001`
+- 2 sick: `flowrepo_covid_EU_034_flow_001` and `flowrepo_covid_EU_048_flow_001`
   with `98_608` and `123_154` events, resp.
-- 2 negative: `flowrepo_covid_EU_013_flow_001` and `flowrepo_covid_EU_004_flow_001`
+- 2 healthy: `flowrepo_covid_EU_013_flow_001` and `flowrepo_covid_EU_004_flow_001`
   with `170_075` and `183_001` events, resp.
+
+
+### Code
+Most of my developped code are in
+- `docs/notebooks/`
+- and `ahead/`
+
+Because I developped the code on a very
+old laptop (Thinkpad X61s with Intel(R)
+Core(TM)2 Duo CPU, to be more precise),
+most of the code I wrote I ran on Colab.
+Sorry for not devoting more time on
+converting them into Python script.
+
+But from another point of view, since
+most of the code carries experiment
+smells, i.e. nothing really of
+production-ready, so I think it isn't
+so bad that they were in
+Jupyter-notebook form.
