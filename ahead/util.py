@@ -25,6 +25,8 @@ def get_fsc_ssc_chunks(
             gate_fraction=gate_fraction,
         )
     n_events = s_gated.shape[0]
+    if chunk_size > n_events:
+        chunk_size = n_events
     for k in range(0, n_events, chunk_size):
         chunk = s_gated[k:k+chunk_size, channels]
         yield chunk
